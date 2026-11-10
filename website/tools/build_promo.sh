@@ -46,7 +46,7 @@ for i in $(seq 1 8); do
 done
 csv=$(IFS=,; echo "${D[*]}")
 total=$(python -c "print(round(sum([$csv]) - 8*$X, 3))")
-"$FF" -hide_banner -loglevel error -y $inputs -i music.wav -filter_complex "${fc}[$prev]format=yuv420p[v];[9:a]atrim=0:$total,afade=t=out:st=$(python -c "print($total-2.5)"):d=2.5[a]" \
-  -map "[v]" -map "[a]" -c:v libx264 -profile:v high -preset slow -crf 25 -r 30 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart "$OUT/stv-demo.mp4"
-"$FF" -hide_banner -loglevel error -y -ss 5.5 -i "$OUT/stv-demo.mp4" -frames:v 1 -q:v 3 "$OUT/stv-demo-poster.jpg"
-echo "promo: $total s -> $OUT/stv-demo.mp4"
+"$FF" -hide_banner -loglevel error -y $inputs -i music.wav -filter_complex "${fc}[$prev]format=yuv420p[v];[9:a]atrim=0:$total,afade=t=out:st=$(python -c "print($total-3)"):d=3[a]" \
+  -map "[v]" -map "[a]" -c:v libx264 -profile:v high -preset slow -crf 25 -r 30 -pix_fmt yuv420p -c:a aac -b:a 96k -movflags +faststart "$OUT/stv-demo-v2.mp4"
+"$FF" -hide_banner -loglevel error -y -ss 5.5 -i "$OUT/stv-demo-v2.mp4" -frames:v 1 -q:v 3 "$OUT/stv-demo-poster.jpg"
+echo "promo: $total s -> $OUT/stv-demo-v2.mp4"

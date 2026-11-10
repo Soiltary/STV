@@ -36,7 +36,7 @@ Roll back by promoting an earlier deployment in the Cloudflare dashboard (Pages 
 
 ## Promo video
 
-`website/site/assets/video/stv-demo.mp4` is built from real screen recordings of STV on an Android TV box
+`website/site/assets/video/stv-demo-v2.mp4` is built from real screen recordings of STV on an Android TV box
 (`adb shell screenrecord`), original synthesized music and the STV logo:
 
 ```bash
