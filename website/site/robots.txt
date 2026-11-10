@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://stv-tools.pages.dev/sitemap.xml
