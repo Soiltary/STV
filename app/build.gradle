@@ -1,0 +1,62 @@
+plugins { id 'com.android.application' }
+
+def signingProps = new Properties()
+def signingPropsFile = file('../signing/signing.properties')
+if (signingPropsFile.exists()) {
+    signingProps.load(new FileInputStream(signingPropsFile))
+}
+
+android {
+    namespace 'tv.customhome.launcher'
+    compileSdk 35
+    flavorDimensions 'tv'
+    productFlavors {
+        solitary {
+            applicationId 'tv.customhome.launcher'
+            minSdk 26
+            targetSdk 35
+            versionCode 28
+            versionName '1.5.1'
+        }
+        trial {
+            applicationId 'tv.customhome.launcher.test'
+            minSdk 26
+            targetSdk 35
+            versionCode 2
+            versionName '1.0.0-trial'
+        }
+    }
+    // Official builds are signed with the maintainer's key from ../signing/signing.properties (never committed).
+    // Without that file, release builds are left unsigned so anyone can build from source and sign with their own key.
+    def hasSigning = signingProps['solitary.tv.release.storeFile'] != null
+    signingConfigs {
+        if (hasSigning) {
+            release {
+                storeFile file(signingProps['solitary.tv.release.storeFile'])
+                storePassword signingProps['solitary.tv.release.storePassword']
+                keyAlias signingProps['solitary.tv.release.keyAlias']
+                keyPassword signingProps['solitary.tv.release.keyPassword']
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (hasSigning) signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.11.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20240303'
+}
+
+tasks.withType(JavaCompile).configureEach { options.encoding = "UTF-8" }

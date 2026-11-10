@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ar-SA" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://appassets.androidplatform.net; connect-src 'self' https://api.open-meteo.com; frame-src 'none'; object-src 'none'">
+  <meta name="viewport" content="width=1920, user-scalable=no">
+  <title>Solitary TV</title>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+  <div id="stage">
+    <canvas id="sky" width="1920" height="1080"></canvas>
+    <div id="landscape" aria-hidden="true">
+      <div class="landscape-layer"></div>
+      <div class="landscape-layer"></div>
+      <div class="landscape-haze"></div>
+    </div>
+    <canvas id="precip" width="1920" height="1080"></canvas>
+    <div class="wall" id="wall" hidden><div class="wall-img" id="wallImg"></div></div>
+    <div class="wall-dim" id="wallDim"></div>
+    <div class="flash" id="flash"></div>
+    <div class="scrim" id="scrim"></div>
+    <div class="page-dim" id="pageDim"></div>
+
+    <!-- ===== Top navigation (always visible) ===== -->
+    <header class="topbar" id="topbar">
+      <div class="brand" id="brand"><img class="brand-logo" id="brandLogo" alt="STV" hidden><span class="brand-mark" data-icon="spark"></span><span class="brand-text">Solitary TV</span></div>
+      <nav class="nav hscroll" id="nav"></nav>
+      <div class="place" id="place"></div>
+    </header>
+
+    <!-- ===== Home ===== -->
+    <main id="page-home" class="page">
+      <div class="home-scroll scroller" id="homeScroll"><div class="home-flow">
+      <section class="hero">
+        <div class="clock" id="clock"></div>
+        <div class="date" id="date"></div>
+        <div class="greet"><span id="greet"></span><span class="sub" id="sub"></span></div>
+      </section>
+
+      <section class="cards">
+        <div class="card weather focusable" id="weather" data-action="forecast">
+          <div class="wx-main">
+            <div class="wx-icon" id="wxIcon"></div>
+            <div class="wx-temp" id="wxTemp">--°</div>
+            <div class="wx-text">
+              <div class="wx-cond" id="wxCond"></div>
+              <div class="wx-hilo" id="wxHilo"></div>
+            </div>
+          </div>
+          <div class="wx-details" id="wxDetails"></div>
+          <div class="wx-sun" id="wxSun"></div>
+        </div>
+        <div class="card prayer focusable" id="prayer" data-action="refresh-prayer">
+          <div class="card-eyebrow"><span data-icon="mosque"></span><span id="prayerTitle"></span><span class="card-source" id="prayerSource"></span></div>
+          <div class="prayer-next" id="nextPrayer"></div>
+          <div class="prayer-times" id="prayerTimes"></div>
+        </div>
+      </section>
+
+      <section class="home-apps">
+        <div class="row-head">
+          <h2 data-i18n="Your apps">تطبيقاتك</h2>
+          <button class="chip focusable" data-action="manage-home" data-i18n="Manage">إدارة</button>
+        </div>
+        <div class="slots" id="homeGrid"></div>
+      </section>
+      <div class="home-rows" id="homeRows"></div>
+      </div></div>
+    </main>
+
+    <!-- ===== Category (Live, Movies & Shows, Anime, Music, user categories) ===== -->
+    <section id="page-category" class="page" hidden>
+      <div class="page-head">
+        <h1 id="catTitle"></h1>
+        <span class="count" id="catCount"></span>
+        <div class="head-actions">
+          <button class="chip focusable" id="catSort" data-action="cat-sort"></button>
+          <button class="chip focusable" data-action="cat-edit" data-i18n="Edit apps">تعديل التطبيقات</button>
+          <button class="chip focusable" data-action="cat-manage" data-i18n="Manage">إدارة</button>
+        </div>
+      </div>
+      <div class="scroller" id="catScroller"><div class="app-grid" id="catGrid"></div></div>
+    </section>
+
+    <!-- ===== Apps ===== -->
+    <section id="page-apps" class="page" hidden>
+      <div class="page-head">
+        <h1 data-i18n="All apps">جميع التطبيقات</h1>
+        <span class="count" id="appsCount"></span>
+        <div class="search-wrap">
+          <div class="searchbox focusable" id="searchBox" data-action="search">
+            <span class="search-ic" data-icon="search"></span>
+            <input id="searchInput" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" tabindex="-1">
+            <span class="search-hint" id="searchHint" data-i18n="Search apps">ابحث في التطبيقات</span>
+          </div>
+          <button class="chip focusable" id="searchClear" data-action="search-clear" data-i18n="Clear search" hidden>مسح</button>
+        </div>
+      </div>
+      <div class="scroller" id="appsScroller"><div class="app-grid" id="appsGrid"></div></div>
+    </section>
+
+    <!-- ===== Favorites ===== -->
+    <section id="page-favorites" class="page" hidden>
+      <div class="page-head">
+        <h1 data-i18n="Favorites">المفضلة</h1>
+        <span class="count" id="favCount"></span>
+      </div>
+      <div class="scroller" id="favScroller"><div class="app-grid" id="favGrid"></div></div>
+    </section>
+
+    <!-- ===== Store ===== -->
+    <section id="page-store" class="page" hidden>
+      <div class="page-head">
+        <h1 data-i18n="Store">المتجر</h1>
+        <span class="count" data-i18n="App stores on this receiver">المتاجر الموجودة على الرسيفر</span>
+      </div>
+      <div class="store-list" id="storeList"></div>
+    </section>
+
+    <!-- ===== Settings ===== -->
+    <section id="page-settings" class="page" hidden>
+      <div class="page-head">
+        <h1 data-i18n="Settings">الإعدادات</h1>
+      </div>
+      <div class="settings">
+        <div class="settings-tabs" id="settingsTabs"></div>
+        <div class="settings-rows scroller" id="settingsRows"></div>
+      </div>
+    </section>
+
+    <div class="hint" id="hint"></div>
+
+    <!-- ===== Forecast / dialogs ===== -->
+    <section id="modal" class="modal" hidden>
+      <div class="modal-box" id="modalBox">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-body scroller" id="modalBody"></div>
+      </div>
+    </section>
+
+    <!-- ===== Quick panel ===== -->
+    <aside id="qpanel" class="qpanel" hidden>
+      <div class="qp-head">
+        <div class="qp-time" id="qpTime"></div>
+        <div class="qp-date" id="qpDate"></div>
+      </div>
+      <div class="qp-net" id="qpNet"></div>
+      <div class="qp-grid" id="qpGrid"></div>
+      <div class="qp-foot"><span id="qpVer"></span><span data-i18n="Back closes the panel">زر الرجوع يغلق اللوحة</span></div>
+    </aside>
+
+    <!-- ===== Ambient ===== -->
+    <section id="ambient" class="ambient" hidden>
+      <div class="ss-stage" id="ssStage"><div class="ss-layer"><div class="ss-art"></div></div><div class="ss-layer"><div class="ss-art"></div></div></div>
+      <div class="amb-dim" id="ambDim"></div>
+      <div class="amb-center" id="ambCenter">
+        <div class="amb-time" id="ambTime"></div>
+        <div class="amb-day" id="ambDay"></div>
+        <div class="amb-date" id="ambDate"></div>
+        <div class="amb-info" id="ambInfo">
+          <div class="amb-wx" id="ambWx"></div>
+          <div class="amb-prayer" id="ambPrayer" hidden></div>
+        </div>
+      </div>
+      <div class="amb-hint" data-i18n="Press any button to return"></div>
+    </section>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/weather.js"></script>
+  <script src="js/sky.js"></script>
+  <script src="js/landscape.js"></script>
+  <script src="js/apps.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

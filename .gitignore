@@ -1,0 +1,50 @@
+.gradle/
+**/build/
+local.properties
+.local/
+profiles/*.local.json
+__pycache__/
+*.pyc
+.DS_Store
+.env*
+*.apk
+*.aab
+*.jks
+*.keystore
+*.p12
+signing/
+adbkey*
+*.pem
+*.key
+.idea/
+*.iml
+node_modules/
+.wrangler/
+
+# Fonts that may not be redistributed (the bundled OFL fonts in assets/site/fonts are committed)
+*Thmanyah*
+FONT-LICENSE-Thmanyah.pdf
+
+# Release outputs, device captures and backups stay local
+dist/
+diagnostics/
+*.tar.gz
+*.zip
+
+# Maintainer's private working notes (contain device addresses and local paths)
+PROJECT_STATE.md
+WORK_PROGRESS.md
+QA_FIX_LOG.md
+FINAL_QA.md
+HOME_RECOVERY.md
+
+# Upstream screenshots of a personal build with a non-redistributable font
+docs/screenshots/home.png
+docs/screenshots/home-settings.png
+
+# Large intermediate files for the website/video
+website/assets/logo-big/
+docs/POST_AR.md
+
+# CI workflow kept local until the GitHub login has the workflow scope (gh auth refresh -s workflow)
+.github/workflows/
