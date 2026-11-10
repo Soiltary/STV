@@ -46,5 +46,4 @@ FFMPEG=/path/to/ffmpeg bash website/tools/build_promo.sh <work> website/site/ass
 ```
 
 The work folder holds `raw_s1.mp4` … `raw_s4.mp4`, `logo.png` (a large STV logo from `scripts/art/PrepLogos.java <src> <dir> 400`)
-and `inter.ttf`. Raw recordings are not committed because they come from a personal device. Captions are in
-`site/assets/video/stv-demo.en.vtt` and `stv-demo.ar.vtt`.
+and `inter.ttf`. Raw recordings are not committed because they come from a personal device. The short English captions are part of the video itself.

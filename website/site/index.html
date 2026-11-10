@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://stv-tools.pages.dev/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/Inter-VF.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
 <script>
   /* pick the language before first paint so Arabic visitors never see an English flash */
   (function () {
@@ -28,7 +28,7 @@
     document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
   })();
 </script>
-<script src="app.js?v=1" defer></script>
+<script src="app.js?v=2" defer></script>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
@@ -41,6 +41,7 @@
     <a href="#demo" data-i18n="nav.demo">Demo</a>
     <a href="#install" data-i18n="nav.install">Install</a>
     <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    <a href="https://github.com/Soiltary/STV" target="_blank" rel="noopener">GitHub</a>
   </nav>
   <div class="nav-actions">
     <button class="lang" type="button" id="langToggle" aria-label="Switch language">
@@ -149,8 +150,6 @@
     <figure class="video">
       <video id="demoVideo" controls playsinline preload="none" poster="assets/video/stv-demo-poster.jpg" width="1920" height="1080">
         <source src="assets/video/stv-demo.mp4" type="video/mp4">
-        <track kind="subtitles" src="assets/video/stv-demo.en.vtt" srclang="en" label="English">
-        <track kind="subtitles" src="assets/video/stv-demo.ar.vtt" srclang="ar" label="العربية">
         <a href="assets/video/stv-demo.mp4" data-i18n="demo.fallback">Download the video</a>
       </video>
     </figure>
@@ -223,10 +222,10 @@
   <section class="section support" id="support" aria-labelledby="supportTitle">
     <div class="support-card">
       <h2 id="supportTitle" data-i18n="sup.title">Enjoying STV?</h2>
-      <p data-i18n="sup.text">Report a bug or ask a question on GitHub, or support the project to keep it growing</p>
+      <p data-i18n="sup.text">Report a bug or ask a question on X, or donate to keep the project growing</p>
       <div class="actions">
-        <a class="btn btn-primary" href="https://tip.dokan.sa/solitary" target="_blank" rel="noopener" data-i18n="sup.support">Support</a>
-        <a class="btn btn-ghost" href="https://github.com/Soiltary/STV/issues" target="_blank" rel="noopener" data-i18n="sup.issues">Report an issue</a>
+        <a class="btn btn-primary" href="https://tip.dokan.sa/solitary" target="_blank" rel="noopener" data-i18n="sup.support">Donation</a>
+        <a class="btn btn-ghost" href="https://x.com/Soiltary" target="_blank" rel="noopener" data-i18n="sup.issues">Report an issue</a>
       </div>
     </div>
   </section>
@@ -241,7 +240,7 @@
     <a href="https://syntra-tools.pages.dev/" target="_blank" rel="noopener">Syntra</a>
     <a href="https://github.com/Soiltary/STV" target="_blank" rel="noopener">GitHub</a>
     <a href="https://github.com/Soiltary/STV/releases/download/v1.5.1/STV-v1.5.1-AndroidTV.apk" data-i18n="foot.download">Download</a>
-    <a href="https://tip.dokan.sa/solitary" target="_blank" rel="noopener" data-i18n="foot.support">Support</a>
+    <a href="https://tip.dokan.sa/solitary" target="_blank" rel="noopener" data-i18n="foot.support">Donation</a>
     <a href="https://github.com/Soiltary/STV/blob/main/LICENSE" target="_blank" rel="noopener" data-i18n="foot.license">MIT License</a>
   </nav>
   <p class="copy"><span>STV v1.5.1</span><span class="sep">·</span><span>© 2026 Soiltary</span><span class="sep">·</span><span data-i18n="foot.part">Part of the Syntra collection</span></p>

@@ -54,9 +54,9 @@
     'q7': 'كيف أحدّثه؟', 'a7': 'ثبّت ملف APK الجديد فوق الحالي وإعداداتك تبقى. لا تحذفه قبل',
     'q8': 'كيف أرجع لواجهتي السابقة؟', 'a8': 'اخترها من جديد كتطبيق HOME الافتراضي في إعدادات Android، أو احذف STV',
     'q9': 'هل يشتغل على جهازي؟', 'a9': 'يحتاج Android TV أو Google TV بإصدار Android 8.0 أو أحدث. جُرّب على جهاز واحد بنظام Android 12، فجرّبه كتطبيق عادي قبل ما تخليه الرئيسية',
-    'sup.title': 'عجبك STV؟', 'sup.text': 'بلّغ عن مشكلة أو اسأل في GitHub، أو ادعم المشروع عشان يكبر',
-    'sup.support': 'ادعم', 'sup.issues': 'بلّغ عن مشكلة',
-    'foot.text': 'واجهة رئيسية قابلة للتخصيص لأجهزة Android TV', 'foot.download': 'تحميل', 'foot.support': 'دعم',
+    'sup.title': 'عجبك STV؟', 'sup.text': 'بلّغ عن مشكلة أو اسأل في X، أو تبرّع عشان المشروع يكبر',
+    'sup.support': 'تبرّع', 'sup.issues': 'بلّغ عن مشكلة',
+    'foot.text': 'واجهة رئيسية قابلة للتخصيص لأجهزة Android TV', 'foot.download': 'تحميل', 'foot.support': 'تبرّع',
     'foot.license': 'ترخيص MIT', 'foot.part': 'ضمن مجموعة Syntra'
   };
   var ALT = {
@@ -91,22 +91,7 @@
     label.lang = l === 'ar' ? 'en' : 'ar';
     document.getElementById('langToggle').setAttribute('aria-label', l === 'ar' ? 'Switch to English' : 'التبديل إلى العربية');
     document.title = l === 'ar' ? 'STV · تلفزيونك. مساحتك.' : 'STV · Your TV. Your Space.';
-    setCaptions();
     try { localStorage.setItem('stv-language', l); } catch (e) {}
-  }
-
-  /* captions follow the page language without reloading the video */
-  var video = document.getElementById('demoVideo');
-  function setCaptions() {
-    if (!video || !video.textTracks) return;
-    for (var i = 0; i < video.textTracks.length; i++) {
-      var t = video.textTracks[i];
-      t.mode = t.language === lang ? 'showing' : 'disabled';
-    }
-  }
-  if (video) {
-    video.addEventListener('loadedmetadata', setCaptions);
-    if (video.textTracks && video.textTracks.addEventListener) video.textTracks.addEventListener('addtrack', setCaptions);
   }
 
   document.getElementById('langToggle').addEventListener('click', function () { apply(lang === 'ar' ? 'en' : 'ar'); });
