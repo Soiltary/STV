@@ -295,7 +295,8 @@ public final class MainActivity extends Activity {
 
     /** Shows Android's own "make this the default Home app" dialog; the user confirms it. */
     boolean requestHomeRole() {
-        if (!canRequestHomeRole()) return false;
+        // explicit API check (same result as canRequestHomeRole) so Android Lint can see RoleManager is API 29+
+        if (android.os.Build.VERSION.SDK_INT < 29 || !canRequestHomeRole()) return false;
         android.app.role.RoleManager rm = getSystemService(android.app.role.RoleManager.class);
         Intent intent = rm.createRequestRoleIntent(android.app.role.RoleManager.ROLE_HOME);
         runOnUiThread(() -> {
