@@ -35,7 +35,7 @@ installs update in place and keep their settings.
 | **Appearance settings** | **Arabic interface** |
 | ![Appearance settings](docs/screenshots/stv/appearance-settings.jpg) | ![Home screen in Arabic](docs/screenshots/stv/home-arabic.jpg) |
 
-All screenshots are taken from STV 1.5.1 running on a real Android TV box.
+All screenshots are taken from STV 1.5.x running on a real Android TV box.
 
 ## Key features
 
@@ -81,11 +81,11 @@ The release page lists the APK, its size and its SHA-256 checksum.
 
 1. On the TV, allow your file manager or downloader app to **install unknown apps**
    (usually **Settings → Apps → Special app access → Install unknown apps**; the path varies by device).
-2. Download `STV-v1.5.1-AndroidTV.apk` on the TV, or copy it to the TV's `Download` folder.
+2. Download `STV-v1.5.2-AndroidTV.apk` on the TV, or copy it to the TV's `Download` folder.
 3. Open the APK from the file manager and choose **Install**.
 4. Open STV from the app list. It currently appears as **Solitary TV** (see [Known limitations](#known-limitations)).
 
-With ADB from a computer: `adb install STV-v1.5.1-AndroidTV.apk`
+With ADB from a computer: `adb install STV-v1.5.2-AndroidTV.apk`
 
 ## Set STV as Home
 
@@ -202,8 +202,9 @@ docs/                          Screenshots and upstream documentation
 - The Android app label and a few internal strings still say *Solitary TV*. STV is shown in the header logo; the label will be
   renamed in a later version.
 - Tested on a single Android 12 device. Home and screensaver behaviour differs between manufacturers.
-- On Android 8.0–9 (API 26–28), the 1.5.1 build can fail when it shows its version under Settings → System & general,
-  and **Export backup to Downloads** is not available there. The source is fixed; the fix ships with the next release.
+- On Android 8.0–9 (API 26–28), **Export backup to Downloads** is not available (it needs Android 10); Save backup and
+  Restore still work. 1.5.2 fixes a crash risk on those versions that 1.5.1 had. Android 8–9 support is checked by Android
+  Lint on CI, not on a real Android 8 or 9 device.
 - Weather (Open-Meteo) and prayer times (AlAdhan) depend on those online services.
 - Some devices offer no Home setting in the Android UI; ADB is then the only way to make STV the Home screen.
 
