@@ -221,9 +221,15 @@ public final class NativeBridge {
     @JavascriptInterface public String appVersion() {
         try {
             PackageInfo info = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
-            return new JSONObject().put("name", info.versionName).put("code", info.getLongVersionCode())
+            return new JSONObject().put("name", info.versionName).put("code", versionCode(info))
                     .put("package", activity.getPackageName()).toString();
         } catch (Exception e) { return "{}"; }
+    }
+
+    /** getLongVersionCode() exists only on Android 9+; minSdk is 26. */
+    @SuppressWarnings("deprecation")
+    static long versionCode(PackageInfo info) {
+        return android.os.Build.VERSION.SDK_INT >= 28 ? info.getLongVersionCode() : info.versionCode;
     }
 
     // ---------------------------------------------------------------- wallpapers, screensaver, sounds (1.3.0)
@@ -272,6 +278,8 @@ public final class NativeBridge {
     /** Copies a backup to Download/SolitaryTV/ through MediaStore (no storage permission). Returns the path or "". */
     @JavascriptInterface public String exportBackup(String json) {
         if (json == null || json.length() > MAX_TEXT) return "";
+        // MediaStore.Downloads needs Android 10; on older versions export is unavailable (the in-app backup still works)
+        if (android.os.Build.VERSION.SDK_INT < 29) return "";
         try {
             new JSONObject(json);
             String name = "SolitaryTV-backup-" + new java.text.SimpleDateFormat("yyyy-MM-dd-HHmm", java.util.Locale.ROOT)

@@ -30,3 +30,12 @@ jobs:
       - run: node --test 'web-tests/*.test.cjs'
       # No signing key in CI: the release build is produced unsigned, which still compiles, shrinks and lints the real app.
       - run: ./gradlew --no-daemon testSolitaryReleaseUnitTest lintSolitaryRelease assembleSolitaryRelease assembleSolitaryDebug
+      - name: Upload lint and test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            app/build/reports/
+          if-no-files-found: ignore
+          retention-days: 14

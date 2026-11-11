@@ -202,6 +202,8 @@ docs/                          Screenshots and upstream documentation
 - The Android app label and a few internal strings still say *Solitary TV*. STV is shown in the header logo; the label will be
   renamed in a later version.
 - Tested on a single Android 12 device. Home and screensaver behaviour differs between manufacturers.
+- On Android 8.0–9 (API 26–28), the 1.5.1 build can fail when it shows its version under Settings → System & general,
+  and **Export backup to Downloads** is not available there. The source is fixed; the fix ships with the next release.
 - Weather (Open-Meteo) and prayer times (AlAdhan) depend on those online services.
 - Some devices offer no Home setting in the Android UI; ADB is then the only way to make STV the Home screen.
 

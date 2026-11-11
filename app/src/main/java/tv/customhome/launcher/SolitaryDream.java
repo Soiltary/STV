@@ -109,7 +109,7 @@ public final class SolitaryDream extends DreamService {
         @JavascriptInterface public String appVersion() {
             try {
                 PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-                return new JSONObject().put("name", info.versionName).put("code", info.getLongVersionCode()).toString();
+                return new JSONObject().put("name", info.versionName).put("code", NativeBridge.versionCode(info)).toString();
             } catch (Exception e) { Log.w(MainActivity.TAG, "dream version", e); return "{}"; }
         }
     }
