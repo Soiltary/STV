@@ -46,6 +46,4 @@ docs/screenshots/home-settings.png
 website/assets/logo-big/
 docs/POST_AR.md
 
-# CI workflow kept local until the GitHub login has the workflow scope (gh auth refresh -s workflow)
-.github/workflows/
 FINAL_PUBLICATION_REPORT.md

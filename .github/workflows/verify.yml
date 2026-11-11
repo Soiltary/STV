@@ -1,0 +1,32 @@
+name: Verify
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - uses: gradle/actions/setup-gradle@v4
+      - run: python3 -m unittest discover -s scripts -p 'test_*.py'
+      - run: node --test 'web-tests/*.test.cjs'
+      # No signing key in CI: the release build is produced unsigned, which still compiles, shrinks and lints the real app.
+      - run: ./gradlew --no-daemon testSolitaryReleaseUnitTest lintSolitaryRelease assembleSolitaryRelease assembleSolitaryDebug
